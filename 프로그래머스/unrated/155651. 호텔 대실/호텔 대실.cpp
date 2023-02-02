@@ -12,10 +12,10 @@ struct Time
     
     bool operator==(const Time &t) const { return (hour == t.hour) && (minute == t.minute); }
     
-    bool operator<=(const Time &t) const
+    bool operator>(const Time &t) const
     {
-        if(hour == t.hour) return minute <= t.minute;
-        else return hour <= t.hour;
+        if(hour == t.hour) return minute > t.minute;
+        else return hour > t.hour;
     }
     
     bool operator<(const Time &t) const
@@ -48,7 +48,8 @@ int solution(vector<vector<string>> book_time) {
             eh = stoi(book_time[c][1].substr(0, 2)), em = stoi(book_time[c][1].substr(3, 2)); em += 9;
         if(em >= 60) { em -= 60; eh += 1; if(eh == 24) { eh = 23; em = 59; } }
         
-        Book tb; tb.startTime = Time(sh, sm); tb.endTime = Time(eh, em);
+        Book tb;
+        tb.startTime = Time(sh, sm); tb.endTime = Time(eh, em);
         qu.push(tb);
     }
     
@@ -66,22 +67,7 @@ int solution(vector<vector<string>> book_time) {
             }
             else
             {
-                bool isWrong = false;
-                for(int v = 0; v < vec_Book[i].size(); v++)
-                {
-                    if((vec_Book[i][v].startTime <= b.startTime && b.startTime <= vec_Book[i][v].endTime)
-                       ||
-                       (vec_Book[i][v].startTime <= b.endTime && b.endTime <= vec_Book[i][v].endTime)
-                       ||
-                       (b.startTime <= vec_Book[i][v].endTime && vec_Book[i][v].endTime <= b.endTime)
-                       ||
-                       (b.startTime <= vec_Book[i][v].startTime && vec_Book[i][v].startTime <= b.endTime))
-                    {
-                        isWrong = true; break;
-                    }
-                }
-                
-                if(!isWrong)
+                if(b.startTime > vec_Book[i][vec_Book[i].size() - 1].endTime)
                 {
                     vec_Book[i].push_back(b);
                     break;
