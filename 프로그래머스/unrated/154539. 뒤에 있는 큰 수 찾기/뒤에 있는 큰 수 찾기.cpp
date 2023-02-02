@@ -27,10 +27,7 @@ vector<int> solution(vector<int> numbers) {
                 big.push_back(x);
                 break;
             }
-            else
-            {
-                big.pop_back();
-            }
+            else big.pop_back();
             
             if(big.size() == 0)
             {
