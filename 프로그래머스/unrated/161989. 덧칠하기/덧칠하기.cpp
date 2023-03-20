@@ -1,6 +1,5 @@
 #include <string>
 #include <vector>
-#include <iostream>
 using namespace std;
 
 vector<bool> isPaint;
@@ -23,7 +22,7 @@ int solution(int n, int m, vector<int> section) {
     for(int x = (n - m + 2); x <= n; x++)
     {
         
-        if(!isPaint[x]) { cout << x << "가 아직 안칠해짐!" << endl; ++answer; break; }
+        if(!isPaint[x]) { ++answer; break; }
     }
     
     
