@@ -29,7 +29,6 @@ int solution(vector<int> numbers, int target) {
     return ans;
 }
 
-
 /*
 // 너비우선탐색 (BFS)
 int solution(vector<int> numbers, int target)
