@@ -3,7 +3,7 @@
 #include <queue>
 using namespace std;
 
-/*
+// 깊이우선탐색 (DFS)
 vector<int> num;
 int len, tar, ans;
 
@@ -29,8 +29,9 @@ int solution(vector<int> numbers, int target) {
     return ans;
 }
 
-*/
 
+/*
+// 너비우선탐색 (BFS)
 int solution(vector<int> numbers, int target)
 {
     vector<int> isAlreadyCheck; vector<int> resetVec(2001, 0);
@@ -60,3 +61,4 @@ int solution(vector<int> numbers, int target)
     
     return answer;
 }
+*/
