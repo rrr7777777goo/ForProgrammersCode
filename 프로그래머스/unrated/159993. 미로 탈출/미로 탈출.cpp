@@ -15,7 +15,7 @@ int solution(vector<string> maps) {
         for(int x = 0; x < maps[0].size(); x++)
         {
             mM[y+1][x+1] = maps[y][x];
-            if(maps[y][x] == 'S') { qu_Y.push(y+1); qu_X.push(x+1); isVisited[y+1][x+1] = true; }
+            if(maps[y][x] == 'S') { mM[y+1][x+1] = 'O'; qu_Y.push(y+1); qu_X.push(x+1); isVisited[y+1][x+1] = true; }
         }
     
         
@@ -69,10 +69,6 @@ int solution(vector<string> maps) {
                             break;
                         }
                         else { isVisited[nY][nX] = true; tqu_Y.push(nY); tqu_X.push(nX); }
-                    }
-                    else if (mM[nY][nX] == 'S')
-                    {
-                        isVisited[nY][nX] = true; tqu_Y.push(nY); tqu_X.push(nX);
                     }
                 }   
             } 
