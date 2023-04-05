@@ -27,7 +27,7 @@ int solution(int N, vector<vector<int>> road, int K) {
         {
             if(isCheck[i]) continue;
             
-            if(graph[currentIdx][i] < 1000000)
+            if(graph[currentIdx][i] < 10001)
             {
                 int c1 = vec_time[currentIdx] + graph[currentIdx][i];
                 int c2 = vec_time[i];
