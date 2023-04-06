@@ -4,8 +4,6 @@
 using namespace std;
 
 int solution(vector<vector<int>> dots) {
-    int answer = 0;
-    
     int lX = 256, rX = -256, uY = -256, dY = 256;
     
     for(int i = 0; i < dots.size(); i++)
