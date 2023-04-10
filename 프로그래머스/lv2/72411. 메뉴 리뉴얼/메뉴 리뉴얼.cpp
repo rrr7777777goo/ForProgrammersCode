@@ -2,7 +2,6 @@
 #include <vector>
 #include <map>
 #include <queue>
-#include <iostream>
 #include <algorithm>
 using namespace std;
 
@@ -10,23 +9,17 @@ bool isCourse[11];
 int maxi[11];
 vector<string> list[11], resetVec;
 
-map<string, bool> jh;
-map<string, bool> johab[20];
+map<string, bool> jh, johab[20];
 typedef map<string, bool>::iterator iter;
 
 priority_queue<string, vector<string>, greater<string>> qu;
 
-int maxC;
-int dnum; string dstr;
+int maxC, dnum; string dstr;
 
 string tmp = "";
 void DFS(int n)
 {
-    if(isCourse[tmp.size()])
-    {
-        johab[dnum][tmp] = true;
-        jh[tmp] = true;
-    }
+    if(isCourse[tmp.size()]) { johab[dnum][tmp] = true; jh[tmp] = true; }
     
     if(tmp.size() < maxC)
     {
@@ -46,14 +39,12 @@ vector<string> solution(vector<string> orders, vector<int> course) {
     maxC = course[course.size() - 1];
     for(int i = 0; i < orders.size(); i++)
     {
-        dnum = i; dstr = orders[i]; sort(dstr.begin(), dstr.end());
-        DFS(0);
+        dnum = i; dstr = orders[i]; sort(dstr.begin(), dstr.end()); DFS(0);
     }
     
     for(iter it = jh.begin(); it != jh.end(); it++)
     {
-        string chk = it->first;
-        int len = it->first.size(), cnt = 0;
+        string chk = it->first; int len = it->first.size(), cnt = 0;
         
         for(int i = 0; i < orders.size(); i++)
         {
@@ -62,11 +53,7 @@ vector<string> solution(vector<string> orders, vector<int> course) {
         
         if(cnt >= 2)
         {
-            if(maxi[len] < cnt)
-            {
-                maxi[len] = cnt;
-                list[len] = resetVec; list[len].push_back(chk);
-            }
+            if(maxi[len] < cnt) { maxi[len] = cnt; list[len] = resetVec; list[len].push_back(chk); }
             else if(maxi[len] == cnt) { list[len].push_back(chk); }
         }
     }
@@ -74,20 +61,10 @@ vector<string> solution(vector<string> orders, vector<int> course) {
     for(int i = 0; i < course.size(); i++)
     {
         int n = course[i];
-        
-        for(int x = 0; x < list[n].size(); x++)
-        {
-            qu.push(list[n][x]);
-        }
+        for(int x = 0; x < list[n].size(); x++) qu.push(list[n][x]);
     }
     
     vector<string> answer;
-    
-    while(!qu.empty())
-    {
-        answer.push_back(qu.top());
-        qu.pop();
-    }
-    
+    while(!qu.empty()) { answer.push_back(qu.top());  qu.pop(); }
     return answer;
 }
