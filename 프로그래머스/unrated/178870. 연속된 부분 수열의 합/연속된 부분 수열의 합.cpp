@@ -13,16 +13,15 @@ vector<int> solution(vector<int> sequence, int k) {
         if(preE != e) { sum += sequence[e]; preE = e; }
         
         if(sum < k) { ++e; }
-        else if(sum > k) { sum -= sequence[s]; ++s; }
         else if (sum == k)
         {
             int len1 = answer[1] - answer[0] + 1, len2 = e - s + 1;
             
             if(len2 < len1) { answer[0] = s; answer[1] = e; }
             
-            ++e; preE = e-1;
-            sum -= sequence[s]; ++s;
+            ++e;
         }
+        else if(sum > k) { sum -= sequence[s]; ++s; }
     }
     
     return answer;
