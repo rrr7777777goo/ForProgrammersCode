@@ -1,51 +1,61 @@
 #include <string>
 #include <vector>
+#include <iostream>
 using namespace std;
 
 int solution(int n) {
     
-    string s1 = "";
-    while(n > 0) { s1 = (char)((n%2) + '0') + s1; n /= 2; }
+    string str = "";
     
-    bool isFind_1 = false, isComplete = false; int cnt_1 = 0;
-    for(int i = s1.size() - 1; i >= 0; i--)
+    while(n > 0)
     {
-        if(s1[i] == '0')
+        int mok = n / 2, namuzi = n % 2;
+        
+        char x = '0' + namuzi;
+        string tmp = ""; tmp += x;
+        str = tmp + str;
+        
+        n = mok;
+    }
+    
+    int cntOne = 0;
+    for(int i = str.size() - 1; i >= -1; i--)
+    {
+        if(i == -1)
         {
-            if(isFind_1)
-            {
-                s1[i+1] = '0'; s1[i] = '1';
-                --cnt_1;
-                isComplete = true;
-                break;
-            }
+            string newOne = "1";
+            str = newOne + str;
+            break;
+        }
+        
+        if(cntOne == 0)
+        {
+           if(str[i] == '1') { ++cntOne; str[i] = '0'; }
         }
         else
         {
-            isFind_1 = true;
-            s1[i] = '0';
-            ++cnt_1;
+            if(str[i] == '0') { str[i] = '1'; break; }
+            else { ++cntOne; str[i] = '0'; }
         }
     }
     
-    if(!isComplete)
-    {
-        s1 = '1' + s1;
-        --cnt_1;
-    }
+    --cntOne;
     
-    int idx = s1.size()-1;
-    while(cnt_1 > 0)
+    for(int i = str.size() - 1; i >= 0; i--)
     {
-        s1[idx--] = '1';
-        --cnt_1;
+        if(cntOne == 0) break;
+        
+        str[i] = '1';
+        --cntOne;
     }
+
+    int answer = 0;
     
-    int answer = 0; int za = 1;
-    for(int i = s1.size() - 1; i >= 0; i--)
+    int zari = 1;
+    for(int i = str.size() - 1; i >= 0; i--)
     {
-        answer += za * (s1[i] - '0');
-        za *= 2;
+        if(str[i] == '1') answer += zari;
+        zari *= 2;
     }
     
     return answer;
