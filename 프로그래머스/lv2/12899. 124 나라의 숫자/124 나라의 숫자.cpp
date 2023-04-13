@@ -1,5 +1,6 @@
 #include <string>
 #include <vector>
+
 using namespace std;
 
 string solution(int n) {
@@ -7,17 +8,20 @@ string solution(int n) {
     
     while(n > 0)
     {
-        int mok = n / 3, namuzi = n % 3;
-        if(namuzi == 0)
-        {
-            --mok;
-            namuzi = 4;
-        }
-        string tmp_str = "";
-        tmp_str = '0' + namuzi;
-        answer = tmp_str + answer;
+        int mok = n / 3;
+        int namuzi = n % 3;
+        
+        string nstr = "";
+        if(namuzi == 1) { nstr = "1"; }
+        else if (namuzi == 2) { nstr = "2"; }
+        else { nstr = "4"; --mok; }
+        
+        string tmp = nstr;
+        tmp += answer;
+        answer = tmp;
+        
         n = mok;
     }
-
+    
     return answer;
 }
