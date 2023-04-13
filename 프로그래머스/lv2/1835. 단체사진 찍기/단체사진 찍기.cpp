@@ -1,63 +1,73 @@
 #include <string>
 #include <vector>
-#include <map>
 #include <cmath>
 #include <iostream>
 using namespace std;
 
 int answer;
-vector<char> fri;
-map<char, int> ma;
-vector<string> dda;
+int findIdx[26];
+vector<string> cas;
+vector<char> fr; vector<bool> isUsed;
 
-int z2 = 0;
-void DFS(int n)
+vector<char> photo;
+void DFS(int nu)
 {
-    if(n == 8)
+    if(nu == 8)
     {
         bool isCorrect = true;
-        
-        for(int i = 0; i < dda.size(); i++)
+        for(int i = 0; i < cas.size(); i++)
         {
-            int len = abs(ma[dda[i][0]] - ma[dda[i][2]]);
-            int gan = dda[i][4] - '0' + 1;
-            switch(dda[i][3])
+            int i1 = findIdx[cas[i][0] - 'A'], i2 = findIdx[cas[i][2] - 'A'], i3 = cas[i][4] - '0' + 1;
+
+            if(cas[i][3] == '<')
             {
-                case '<': if(len >= gan) isCorrect = false; break;
-                case '=': if(len != gan) isCorrect = false; break;
-                case '>': if(len <= gan) isCorrect = false; break;
+                if(abs(i1 - i2) < i3) continue;
+                else { isCorrect = false; break; }
             }
-            if(!isCorrect) break;
+            else if (cas[i][3] == '=')
+            {
+                if(abs(i1 - i2) == i3) continue;
+                else { isCorrect = false; break; }
+            }
+            else
+            {
+                if(abs(i1 - i2) > i3) continue;
+                else { isCorrect = false; break; }
+            }
         }
-        
+
         if(isCorrect) ++answer;
         return;
     }
-    
-    for(int i = 0; i < fri.size(); i++)
+
+    for(int i = 0; i < 8; i++)
     {
-        if(ma[fri[i]] == 0)
+        if(!isUsed[i])
         {
-            ma[fri[i]] = (n+1);
-            DFS(n+1);
-            ma[fri[i]] = 0;
+            isUsed[i] = true;
+            photo.push_back(fr[i]);
+            findIdx[fr[i]-'A'] = photo.size() - 1;
+            DFS(nu + 1);
+            findIdx[fr[i]-'A'] = 0;
+            photo.pop_back();
+            isUsed[i] = false;
         }
     }
 }
 
+// 전역 변수를 정의할 경우 함수 내에 초기화 코드를 꼭 작성해주세요.
 int solution(int n, vector<string> data) {
     answer = 0;
-    
-    dda = data;
-    
-    fri = vector<char>();
-    fri.push_back('A'); fri.push_back('C'); fri.push_back('F'); fri.push_back('J');
-    fri.push_back('M'); fri.push_back('N'); fri.push_back('R'); fri.push_back('T');
-    
-    ma = map<char, int>();
-    for(int i = 0; i < fri.size(); i++) ma[fri[i]] = 0;
-    
+
+    cas = data;
+
+    for(int i = 0; i < 26; i++) findIdx[i] = 0;
+
+    fr.push_back('A'); fr.push_back('C'); fr.push_back('F'); fr.push_back('J');
+    fr.push_back('M'); fr.push_back('N'); fr.push_back('R'); fr.push_back('T');
+    isUsed = vector<bool>(8, false);
+
     DFS(0);
-    
+
     return answer;
 }
