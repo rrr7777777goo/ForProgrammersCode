@@ -42,9 +42,5 @@ string FUNC(string p)
 
 
 string solution(string p) {
-    string answer = "";
-    
-    answer = FUNC(p);
-    
-    return answer;
+    return FUNC(p);
 }
