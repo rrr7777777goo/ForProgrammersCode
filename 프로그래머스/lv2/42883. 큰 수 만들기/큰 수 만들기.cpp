@@ -1,30 +1,26 @@
 #include <string>
 #include <vector>
-
+#include <iostream>
 using namespace std;
 
 string solution(string number, int k) {
-    string answer = "";
+    int cnt = 0;
 
-    int biggest = 0;
-    int idx = 0;
-
-    for (int i = 0; i < number.length(); ++i)
+    for(int i = 0; i < number.size()-1; )
     {
-        if (biggest < number[i])
+        if(cnt == k) break;
+        
+        if(number[i] < number[i+1])
         {
-            biggest = number[i];
-            idx = i;
+            string newStr001 = number.substr(0, i), newStr002 = number.substr(i+1, -1);
+            number = newStr001; number += newStr002;
+            i = i-1 >= 0 ? i-1 : 0;
+            ++cnt;
         }
-
-        if (i == k)
-        {
-            i = idx;
-            ++k;
-            answer.push_back(biggest);
-            biggest = 0;
-        }
+        else { i++; }
     }
-
-    return answer;
+    
+    while(cnt < k) { number.pop_back(); ++cnt; }
+    
+    return number;
 }
