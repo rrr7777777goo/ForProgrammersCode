@@ -14,24 +14,30 @@ struct Data001
         if(i1 == d1.i1) return i2 > d1.i2;
         else return i1 < d1.i1;
     }
+};
+
+struct Data002
+{
+    int idx, sum;
     
-    bool operator>(const Data001 &d1) const
+    Data002(int dx, int su) { idx = dx; sum = su; };
+    
+    bool operator<(const Data002 &d2) const
     {
-        if(sum == d1.sum) return idx > d1.idx;
-        return sum < d1.sum;
+        if(sum == d2.sum) return idx > d2.idx;
+        return sum < d2.sum;
     }
 };
 
+priority_queue<Data001> qu001;
+priority_queue<Data002> qu002;
+
 int solution(vector<vector<int>> scores) {
-    
-    
-    priority_queue<Data001> qu001;
+
     for(int i = 0; i < scores.size(); i++) qu001.push(Data001(scores[i][0], scores[i][1], i));
-    
-    priority_queue<Data001, vector<Data001>, greater<Data001>> qu002;
-    
+
     int maxI1 = qu001.top().i1, maxI2 = qu001.top().i2;
-    qu002.push(qu001.top()); qu001.pop();
+    qu002.push(Data002(qu001.top().idx, qu001.top().sum)); qu001.pop();
     
     while(!qu001.empty())
     {
@@ -41,7 +47,7 @@ int solution(vector<vector<int>> scores) {
             if(chkD1.idx == 0) { return -1; }
             else continue;
         }
-        else { maxI1 = chkD1.i1; maxI2 = maxI2 >= chkD1.i2 ? maxI2 : chkD1.i2; qu002.push(chkD1); }
+        else { maxI1 = chkD1.i1; maxI2 = maxI2 >= chkD1.i2 ? maxI2 : chkD1.i2; qu002.push(Data002(chkD1.idx, chkD1.sum)); }
     }
     
     int rnk = 1, cnt = 1, maxSum = -1;
