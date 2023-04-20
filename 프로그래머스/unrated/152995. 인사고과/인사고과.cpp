@@ -24,7 +24,6 @@ struct Data002
     
     bool operator<(const Data002 &d2) const
     {
-        if(sum == d2.sum) return idx > d2.idx;
         return sum < d2.sum;
     }
 };
@@ -57,7 +56,7 @@ int solution(vector<vector<int>> scores) {
         int tmpSum = qu002.top().sum, tmpIdx = qu002.top().idx; qu002.pop();
         
         if(maxSum == -1) { maxSum = tmpSum; }
-        else { if(maxSum == tmpSum) { ++cnt; } else { rnk += cnt; cnt = 1; } }
+        else { if(maxSum == tmpSum) { ++cnt; } else { maxSum = tmpSum; rnk += cnt; cnt = 1; } }
         
         if(tmpIdx == 0) { return rnk; }
     }
