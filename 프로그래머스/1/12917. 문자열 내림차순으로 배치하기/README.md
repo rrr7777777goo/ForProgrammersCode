@@ -1,10 +1,10 @@
 # [level 1] 문자열 내림차순으로 배치하기 - 12917 
 
-[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/12917) 
+[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/12917?language=cpp) 
 
 ### 성능 요약
 
-메모리: 73.2 MB, 시간: 9.77 ms
+메모리: 4.12 MB, 시간: 0.01 ms
 
 ### 구분
 
@@ -16,7 +16,7 @@
 
 ### 제출 일자
 
-2024년 1월 3일 0:54:4
+2024년 1월 3일 0:55:17
 
 ### 문제 설명
 
