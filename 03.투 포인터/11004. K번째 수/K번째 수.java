@@ -15,11 +15,9 @@ public class Main {
         stringTokenizer = new StringTokenizer(br.readLine());
 
         int[] array = new int[N];
-
         for (int i = 0; i < array.length; i++) {
             array[i] = Integer.parseInt(stringTokenizer.nextToken());
         }
-
         Arrays.sort(array);
 
         System.out.println(array[K-1]);
