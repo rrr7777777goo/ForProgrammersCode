@@ -1,15 +1,6 @@
 import java.util.*;
 import java.io.*;
 
-/**
- * @author 조근호
- * BJ 2531 회전초밥
- * https://www.acmicpc.net/problem/2531
- * 투 포인터 방식을 이용해서 문제를 해결한다.
- * 메모리 : 18664kb
- * 시간 : 184ms
- */
-
 public class Main {
 	public static void main(String[] args) throws IOException{
 		// BufferedReader 객체 생성
