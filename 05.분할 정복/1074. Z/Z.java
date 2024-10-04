@@ -1,16 +1,6 @@
 import java.util.*;
 import java.io.*;
 
-/**
- * @author 조근호
- *
- * 백준 1074. Z
- * https://www.acmicpc.net/problem/1074
- * 분할정복 방식을 이용해서 문제를 해결한다.
- * 메모리 : -kb
- * 시간 : -ms
- */
-
 public class Main {
 	public static void main(String[] args) throws IOException {
 		// BufferedReader 객체 생성
